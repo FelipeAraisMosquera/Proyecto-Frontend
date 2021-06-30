@@ -6,16 +6,28 @@ import { theme } from './styles/themePalette';
 /*import Button from "./components/button";*/
 //components
 import Login from './components/Login';
+import { useEffect, useState } from 'react';
 
 
 function App() {
- 
+  const [users, setUsers] = useState([]);//
+  const obtenerUsuarios = async () =>{
+  const data = await fetch('https://jsonplaceholder.typicode.com/users');
+  const response = await data.json();
+  console.log(response);
+  setUsers(response)
+  }
+
+  useEffect(() => { // se ejecutan dentro de la funcion del components
+    obtenerUsuarios();
+  }, [])//para que se ejecute una vez
+
 	return(
 		<>
-	 <ThemeProvider theme={theme}>
-     <Login/>
+	    <ThemeProvider theme={theme}>
+        <Login users={users}/>
      
-    </ThemeProvider>
+      </ThemeProvider>
 		</>
 	);
 

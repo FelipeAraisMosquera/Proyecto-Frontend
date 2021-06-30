@@ -22,7 +22,7 @@ button:{
   textTransform: 'none',
 },
 paddingButton:{
-  padding: theme.spacing(0,0,0,0),//arriba, derecha, abajo, izquierda
+  padding: theme.spacing(0,10,0,10),//arriba, derecha, abajo, izquierda, el item no acepta spacing
 }
 
 }));
