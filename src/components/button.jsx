@@ -10,6 +10,10 @@ function Button(props) {
                 onClick={mostrarAlerta}>
                 {props.title}
             </button>
+            <button     
+                onClick={mostrarAlerta}>
+                {props.title}
+            </button>
         </>
     )
 }

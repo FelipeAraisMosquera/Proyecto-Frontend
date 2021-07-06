@@ -7,7 +7,7 @@ root:{
 },
 Paper:{ 
   borderRadius: '20px',
-  height: '350px'
+  height: '400px'
 },
 mainContainer: {
   padding: theme.spacing(4,4,4,4)//arriba, derecha, abajo, izquierda

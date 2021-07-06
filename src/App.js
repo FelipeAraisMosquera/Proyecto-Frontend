@@ -5,33 +5,60 @@ import { ThemeProvider } from '@material-ui/styles';
 import { theme } from './styles/themePalette';
 /*import Button from "./components/button";*/
 //components
-import Login from './components/Login';
+//import Login from './components/Login';
 import { useEffect, useState } from 'react';
+//pages
+import LoginPage from './pages/LoginPage';
+import HomePage from './pages/HomePage';
 
+
+
+import { BrowserRouter as Router,  Switch,  Route} from "react-router-dom";
 
 function App() {
-  const [users, setUsers] = useState([]);//
-  const obtenerUsuarios = async () =>{
-  const data = await fetch('https://jsonplaceholder.typicode.com/users');
-  const response = await data.json();
-  console.log(response);
-  setUsers(response)
-  }
+	const [users, setUsers] = useState([]);//
+	const [checkLogin, setCheckLogin] = useState(false);
+  const [googleUserData, setGoogleUserData ] = useState({});
+
+	const obtenerUsuarios = async () =>{
+	const data = await fetch('https://jsonplaceholder.typicode.com/users');
+	const response = await data.json();
+	console.log(response);
+	setUsers(response)
+	}
+
+	useEffect(() => {
+		console.log(checkLogin)
+	}, [checkLogin])
 
   useEffect(() => { // se ejecutan dentro de la funcion del components
     obtenerUsuarios();
-  }, [])//para que se ejecute una vez
-
+}, []);//para que se ejecute una vez
+  console.log('que llega'+ checkLogin)
 	return(
 		<>
-	    <ThemeProvider theme={theme}>
-        <Login users={users}/>
-     
-      </ThemeProvider>
+	<ThemeProvider theme={theme}>
+    {/* <Login users={users}/> */}
+				<Router>
+					<Switch>
+						<Route path="/login">
+							<LoginPage users={users} checkLogin={checkLogin} setCheckLogin={setCheckLogin} setGoogleUserData={setGoogleUserData} googleUserData={googleUserData} />
+						</Route>
+              
+            
+						<Route exact path="/">
+							<HomePage checkLogin={checkLogin} googleUserData={googleUserData}  />
+						</Route>
+					</Switch>
+			
+				</Router>
+			
+			</ThemeProvider>
 		</>
 	);
-
 }
+
+
 
 export default App;
 /*
